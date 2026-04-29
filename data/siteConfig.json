@@ -1,0 +1,68 @@
+{
+  "team": [
+    {
+      "name": "Dr. Alex Chen",
+      "role": "Lead Robotics Engineer",
+      "skills": ["AI", "Control Systems", "ROS"],
+      "github": "#",
+      "linkedin": "#"
+    },
+    {
+      "name": "Sarah Johnson",
+      "role": "Computer Vision Specialist",
+      "skills": ["Deep Learning", "OpenCV", "SLAM"],
+      "github": "#",
+      "linkedin": "#"
+    },
+    {
+      "name": "Marcus Williams",
+      "role": "Hardware Engineer",
+      "skills": ["Embedded Systems", "PCB Design", "IoT"],
+      "github": "#",
+      "linkedin": "#"
+    },
+    {
+      "name": "Emily Zhang",
+      "role": "AI Research Lead",
+      "skills": ["Machine Learning", "NLP", "Reinforcement Learning"],
+      "github": "#",
+      "linkedin": "#"
+    }
+  ],
+  "projects": [
+    {
+      "id": 1,
+      "title": "Autonomous Drone",
+      "description": "AI-powered navigation system with real-time obstacle avoidance and path planning.",
+      "status": "ACTIVE",
+      "tech": ["ROS2", "TensorFlow", "Python", "OpenCV"]
+    },
+    {
+      "id": 2,
+      "title": "Humanoid Assistant",
+      "description": "Bipedal robot with natural language processing and gesture recognition.",
+      "status": "PROTOTYPE",
+      "tech": ["PyTorch", "C++", "NVIDIA Jetson", "SLAM"]
+    },
+    {
+      "id": 3,
+      "title": "Industrial Rover",
+      "description": "Heavy-duty autonomous vehicle for warehouse automation and inventory management.",
+      "status": "DEPLOYED",
+      "tech": ["ROS", "LIDAR", "Docker", "Kubernetes"]
+    },
+    {
+      "id": 4,
+      "title": "AI Vision Bot",
+      "description": "Computer vision system for quality control and defect detection in manufacturing.",
+      "status": "ACTIVE",
+      "tech": ["YOLO", "Flask", "Raspberry Pi", "MQTT"]
+    }
+  ],
+  "dashboardDefaults": {
+    "battery": 85,
+    "cpu": 45,
+    "rpm": 1200,
+    "connectivity": 99
+  }
+}
