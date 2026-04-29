@@ -10,20 +10,38 @@ export default function AIAssistant() {
     { role: 'ai', text: 'Hello! I\'m your AI robotics assistant. How can I help you today?' }
   ]);
   const [input, setInput] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
 
-  const handleSend = () => {
-    if (!input.trim()) return;
+  const handleSend = async () => {
+    if (!input.trim() || isLoading) return;
 
-    setMessages([...messages, { role: 'user', text: input }]);
-    
-    setTimeout(() => {
-      setMessages(prev => [...prev, {
-        role: 'ai',
-        text: 'Thanks for your question! Our robotics systems use advanced AI algorithms for autonomous navigation and real-time decision making.'
-      }]);
-    }, 1000);
-
+    const userMessage = { role: 'user', text: input };
+    setMessages((prev) => [...prev, userMessage]);
     setInput('');
+    setIsLoading(true);
+
+    try {
+      const response = await fetch('/api/chat', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ messages: [...messages, userMessage] }),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.error || 'Failed to fetch AI response');
+      }
+
+      setMessages((prev) => [...prev, { role: 'ai', text: data.reply }]);
+    } catch (error: any) {
+      setMessages((prev) => [
+        ...prev,
+        { role: 'ai', text: `⚠️ System Error: ${error.message}` },
+      ]);
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -96,14 +114,11 @@ export default function AIAssistant() {
                   placeholder="Ask about our robots..."
                   className="flex-1 px-4 py-3 bg-graphite/50 border border-electric-blue/30 rounded-full focus:outline-none focus:border-electric-blue text-white placeholder-silver"
                 />
-                <motion.button
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                  onClick={handleSend}
-                  className="w-12 h-12 bg-electric-blue rounded-full flex items-center justify-center"
+                  disabled={isLoading}
+                  className={`w-12 h-12 rounded-full flex items-center justify-center ${isLoading ? 'bg-muted-slate text-silver cursor-not-allowed' : 'bg-electric-blue text-deep-space hover:scale-105 active:scale-95 transition-transform'}`}
                 >
                   <Send size={20} />
-                </motion.button>
+                </button>
               </div>
             </div>
           </motion.div>
